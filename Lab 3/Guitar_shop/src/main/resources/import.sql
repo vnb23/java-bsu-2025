@@ -1,0 +1,4 @@
+INSERT INTO guitar (brand, model, price, image_url, visible) VALUES ('Gibson', 'Les Paul Standard', 1800.0, 'https://www.tfoa.eu/web/image/product.template/75257/image_512/%5BLPS600UBNH1%5D%20Gibson%20Les%20Paul%20Standard%2060s%20Unburst?unique=b50bc1b', true);
+INSERT INTO guitar (brand, model, price, image_url, visible) VALUES ('Fender', 'Telecaster (midwest emo boy)', 1500.0, 'https://static.bax-shop.es/image/product/42611/350581/caa56d4e/FENDER_STANDARD_TELECASTER_MN_BSB__FRONT.jpg?key=og', true);
+INSERT INTO guitar (brand, model, price, image_url, visible) VALUES ('ESP', 'Alexi Hexex (COB mentioned)', 2000.0, 'https://thumbs.static-thomann.de/thumb/padthumb600x600/pics/bdb/_52/527883/17904433_800.jpg', true);
+INSERT INTO guitar (brand, model, price, image_url, visible) VALUES ('SECRET_GOVERNMENT', 'AMATORY MENTIONED', 999999, 'https://cdn-icons-png.flaticon.com/512/1055/1055644.png', false);

